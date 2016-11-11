@@ -1,40 +1,54 @@
 import React from 'react'
 import Message from './Message'
 import io from 'socket.io-client'
-
-const socket = io();
+var socket = io();
 
 const Conversation = React.createClass({
   displayName: 'Conversation',
 
-  handleKeyPress (e) {
-    if (e.key === 'Enter') {
-      socket.emit('message', {
-        friend_id: this.state.friend_id,
-        body: e.target.value
-      })
-      e.target.value = '';
+  propTypes: {
+    chat: React.PropTypes.object.isRequired
+  },
+
+  componentDidMount () {
+    this._listenForMessages()
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ messages: nextProps.chat.messageList })
+  },
+
+  getInitialState() {
+    return {
+      messages: []
     }
   },
 
-  render () {
-    let renderConversation = message => <Message message={message} />
-
-    let conversation = '';
-    if (this.props.messages.length) {
-      conversation = this.props.messages.map(renderConversation)
-    } else {
-      conversation = <h4 className="text-primary text-center">Start a conversation with Anand</h4>
+  handleKeyPress (e) {
+    if (e.key === 'Enter') {
+      socket.emit('message', { body: e.target.value, chat_id: this.props.chat.id })
+      e.target.value = ''
     }
+  },
 
+  _listenForMessages () {
+    socket.on('message', message => {
+      if (this.props.chat.id == message.chat_id) {
+        this.state.messages.push(message);
+        this.forceUpdate()
+      }
+    })
+  },
+
+  render () {
     return (
-        <div>
-          <div className="message-list" style={{ minHeight: '500px', border: '1px solid black', borderRadius: '5px' }}>
-            {conversation}
-          </div>
-          <input className="form-control" placeholder="Say something..." style={{ height: '45px' }} onKeyPress={this.handleKeyPress} />  
+      <div>
+        <div className="message-list" style={{ minHeight: '500px', maxHeight: '500px', overflow: 'scroll', border: '1px solid black', borderRadius: '5px' }}>
+          {this.state.messages.map(message => <Message message={message} />)}
         </div>
-      )
+        <input className="form-control" placeholder="Say something..." style={{ height: '45px', marginTop: '10px' }} onKeyPress={this.handleKeyPress} />  
+      </div>
+    )
   }
 })
 
