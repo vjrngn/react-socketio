@@ -1,0 +1,21 @@
+import React from 'react'
+
+const Message = React.createClass({
+  displayName: 'Message',
+
+  propTypes: {
+    message: React.PropTypes.object.isRequired
+  },
+
+  render () {
+    return (
+        <div className="panel panel-default" style={{ margin: '20px 20px 0 20px' }}>
+          <div key={this.props.message.friend_id} className="panel-body">
+            {this.props.message.body} <span className="pull-right text-muted">{this.props.message.friend_id}</span>
+          </div>
+        </div>
+    )
+  }
+})
+
+export default Message
