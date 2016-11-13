@@ -2,6 +2,9 @@ var express = require('express'),
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server);
+
+
+  
     
 
 const PORT = process.env.PORT || 3000;
@@ -13,34 +16,34 @@ const user = { id: 1, name: 'Vijay Rangan' },
 
 var chatList = [
     {
-      id: 1, 
+      room_id: 1, 
       friend: anand, 
       messageList: [{
         body: 'Hey',
-        chat_id: 1
+        room_id: 1
       }, 
       {
         body: 'Hey Back',
-        chat_id: 1
-      }],
+        room_id: 1
+      }]
     },
     {
-      id: 2, 
+      room_id: 2, 
       friend: vignesh, 
       messageList: [{
         body: 'Hey Vijay',
-        chat_id: 2
+        room_id: 2
       }, 
       {
         body: 'Hey Piggy',
-        chat_id: 2
-      }],
+        room_id: 2
+      }]
     }
   ];
 
-var updateChatList = function (chatId, message) {
-  var chat = chatList.find(function (chat) { return chat.id == chatId });
-  chat.messageList.push(message);
+var updateChatList = function (roomId, message) {
+  // var chat = chatList.find(function (chat) { return chat.room_id == roomId });
+  // chat.messageList.push(message);
   console.log(chat);
 };
 
@@ -54,10 +57,8 @@ app.get('/chatList', function(req, res) {
 
 io.on('connection', function(socket) {
   console.log('connected');
-
   socket.on('message', function(message) {
-    updateChatList(message.chat_id, message);
-    io.emit('message', message);
+    io.emit('message', { body: 'Receieved: ' + message.body, room_id: message.room_id });
   })
 })
 
