@@ -58,7 +58,8 @@ app.get('/chatList', function(req, res) {
 io.on('connection', function(socket) {
   console.log('connected');
   socket.on('message', function(message) {
-    io.emit('message', { body: 'Receieved: ' + message.body, room_id: message.room_id });
+    console.log(message);
+    io.emit('message', { body: 'Remote receieved: ' + message.body, room_id: message.room_id });
   })
 })
 

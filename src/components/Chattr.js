@@ -2,13 +2,18 @@ import React from 'react'
 import Welcome from './Welcome'
 import ChatList from './ChatList'
 import Conversation from './Conversation'
-import ChatService from '../services/ChatService'
+import { Events, ChatStore } from '../stores/ChatStore'
 
 const Chattr = React.createClass({
   displayName: 'Chattr',
 
   componentDidMount() {
-    this._initChats()
+    ChatStore.init()
+    ChatStore.subscribe(Events.INITIALISED, this._updateChatList)
+  },
+
+  componentWillUnmount() {
+    ChatStore.unsubscribe(Events.INITIALISED, this._updateChatList);
   },
 
   getInitialState () {
@@ -18,12 +23,12 @@ const Chattr = React.createClass({
     }
   },
 
-  showSelectedChat (chat) {
-    this.setState({ currentConversation: chat });
+  _updateChatList (chatList) {
+    this.setState({ chats: ChatStore.getChatList() })
   },
 
-  _initChats () {
-    ChatService.getAllChats().then(chats => this.setState({ chats: this.state.chats.concat(chats) }))
+  showSelectedChat (chat) {
+    this.setState({ currentConversation: chat });
   },
 
   render () {

@@ -1,39 +1,41 @@
 import events from 'events';
-import io from 'socket.io-client'
+import socket from './socketConnection';
+import * as ChatStore from './ChatStore';
 
-const socket = io();
-
+const chatEvents = ChatStore.Events;
+const chatStore = ChatStore.ChatStore;
 const emitter = new events.EventEmitter();
-const Events = { UPDATE: 'UPDATE' };
 
 var messages = [];
-fetch('/chatList').then(res => res.json()).then(msgs => messages = msgs)
-
 socket.on('message', message => {
-  var chat = MessageStore.getMessages(message.room_id)
-  chat.messageList.push(message)
+  messages.push(message)
+  emitter.emit('update')
 })
-
 const MessageStore = {
-  getMessage () {
-    return messages.concat();
+
+  init () {
+    fetch('/chatList').then(res => res.json()).then(chat => {
+      messages = chat
+    }).then(() => emitter.emit('update'));
   },
 
-  getMessagesForRoom (roomId) {
+  getMessages (roomId) {
+    console.log(messages.find);
     return messages.find(message => message.room_id == roomId);
   },
-  subscribe (callback) {
-    emitter.addListener(Events.UPDATE, callback);
+
+  subscribe (eventName, callback) {
+    emitter.addListener(eventName, callback);
   },
-  unsubscribe (callback) {
-    emitter.removeListener(Events.UPDATE, callback);
-  },
-  sendMessage (message) {
-    socket.emit('message', message)
-    messages.push(message);
-    emitter.emit(Events.UPDATE);
+
+  unsubscribe (eventName, callback) {
+    emitter.removeListener(eventName, callback);
   }
 }
-window.ms = MessageStore;
-export default MessageStore
 
+const Events = {
+  UPDATE: 'UPDATE'
+}
+
+window.ms = MessageStore
+export default MessageStore;
