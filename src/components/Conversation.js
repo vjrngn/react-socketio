@@ -1,5 +1,8 @@
 import React from 'react'
 import Message from './Message'
+
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 import { ChatStore, Events } from '../stores/ChatStore'
 import io from 'socket.io-client'
 
@@ -47,20 +50,21 @@ const Conversation = React.createClass({
     }
   },
 
-  // _listenForMessages () {
-  //   socket.on('message', message => {
-  //     this.setState({ messages: this.state.messages.concat([message]) })
-  //   })
-  // },
-
   render () {
+    let composeBoxStyles = { height: '45px', marginTop: '10px', borderRadius: '0', border: 'none', boxShadow: 'none', borderTop: '1px solid #e6e6e6' }
+    
     return (
-      <div>
-        <div className="message-list" style={{ minHeight: '500px', maxHeight: '500px', overflow: 'scroll', border: '1px solid black', borderRadius: '5px' }}>
+      <Card expanded={true} >
+        <CardHeader 
+          title={this.props.chat.friend.name}
+          subtitle="Last need 2 hours ago"
+          avatar="http://loremflickr.com/320/240/man"
+        />
+        <CardText>
           {this.state.messages.map(message => <Message key={Math.random()} message={message} />)}
-        </div>
-        <input className="form-control" placeholder="Say something..." style={{ height: '45px', marginTop: '10px' }} value={this.state.messageBody} onChange={this.handleMessageChange} onKeyPress={this.sendMessage} />  
-      </div>
+        </CardText>
+        <input className="form-control" placeholder="Say something..." style={composeBoxStyles} value={this.state.messageBody} onChange={this.handleMessageChange} onKeyPress={this.sendMessage} />
+      </Card>
     )
   }
 })
