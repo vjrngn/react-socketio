@@ -8,10 +8,11 @@ const Message = React.createClass({
   },
 
   render () {
+    console.log(this.props.message);
     return (
         <div className="panel panel-default" style={{ margin: '20px 20px 0 20px' }}>
           <div className="panel-body">
-            {this.props.message.body} <span className="pull-right text-muted">{this.props.message.friend_id}</span>
+            {this.props.message.body} <span className="pull-right text-muted">{this.props.message.friend.name}</span>
           </div>
         </div>
     )

@@ -1,13 +1,14 @@
 import React from 'react'
+import { Card, CardTitle } from 'material-ui/card';
 
 const Welcome = React.createClass({
   displayName: 'Welcome',
 
   render () {
     return (
-      <div>
-        <h4 className="text-primary">Welcome to chattr!</h4>
-      </div>
+        <Card>
+          <CardTitle className="text-primary" title="Welcome to chattr!" />
+        </Card>
     )
   }
 })

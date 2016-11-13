@@ -44,7 +44,7 @@ const Conversation = React.createClass({
 
   sendMessage (e) {
     if (e.key === 'Enter') {
-      var message = { body: this.state.messageBody, room_id: this.props.chat.room_id };
+      var message = { body: this.state.messageBody, room_id: this.props.chat.room_id, friend: { id: 1, name: 'Vijay Rangan' } };
       ChatStore.sendMessage(message)
       this.setState({ messageBody: '' })
     }
@@ -57,8 +57,8 @@ const Conversation = React.createClass({
       <Card expanded={true} >
         <CardHeader 
           title={this.props.chat.friend.name}
-          subtitle="Last need 2 hours ago"
-          avatar="http://loremflickr.com/320/240/man"
+          subtitle="Last seen 2 hours ago"
+          avatar="http://loremflickr.com/320/240"
         />
         <CardText>
           {this.state.messages.map(message => <Message key={Math.random()} message={message} />)}

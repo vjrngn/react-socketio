@@ -2,6 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
+import { Card } from 'material-ui/card';
+import Avatar from 'material-ui/Avatar';
+import Subheader from 'material-ui/Subheader';
+import TextField from 'material-ui/TextField';
+import {List, ListItem} from 'material-ui/List';
+
 const ChatList = React.createClass({
   displayName: 'ChatList',
 
@@ -32,20 +38,22 @@ const ChatList = React.createClass({
   render () {
     var renderChatItem = chatItem => {
       return (
-        <a ref={'chat-' + chatItem.room_id} onClick={this.showChatConversation.bind(this, chatItem)} className='list-group-item' key={chatItem.friend.id}>
-          {chatItem.friend.name}
-        </a>
+        <ListItem
+          key={chatItem.friend.id} 
+          primaryText={chatItem.friend.name}
+          leftAvatar={<Avatar src="http://loremflickr.com/320/240" />}
+          onClick={this.showChatConversation.bind(this, chatItem)}
+        />
       )
     }
 
     return (
-      <div>
-        <input className="form-control" placeholder="Search" onChange={this.onSearchTermChange} value={this.state.searchTerm} />
-        <br />
-        <div className="list-group">
+      <Card>
+        <List>
+          <Subheader>Recent chats</Subheader>
           {this.props.chats.filter(this.filterFriendList).map(renderChatItem)}
-        </div>
-      </div>
+        </List>
+      </Card>
     )
   }
 })
