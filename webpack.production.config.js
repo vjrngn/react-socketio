@@ -1,7 +1,7 @@
 var Webpack = require('webpack'),
     path = require('path'),
     nodeModulesPath = path.resolve(__dirname, 'node_modules'),
-    buildPath = path.resolve(__dirname, 'server', 'public'),
+    buildPath = path.resolve(__dirname, 'public'),
     sourcePath = path.resolve(__dirname, 'client', 'src', 'main.js');
 
 var config = {

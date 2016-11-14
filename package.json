@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "dev": "webpack --watch",
+    "build": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "dependencies": {
     "babel-core": "^6.18.2",
