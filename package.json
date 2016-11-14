@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
@@ -12,8 +15,5 @@
     "socket.io": "^1.5.1",
     "socket.io-client": "^1.5.1",
     "webpack": "^1.13.3"
-  },
-  "devDependencies": {
-    "babel-preset-react-hmre": "^1.1.1"
   }
 }

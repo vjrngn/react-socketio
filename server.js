@@ -65,7 +65,7 @@ app.get('/chatList', function(req, res) {
 
 io.on('connection', function(socket) {
   socket.on('message', function(message) {
-    var echoResponse = { body: 'Remote receieved: ' + message.body, room_id: message.room_id, friend: message.to };
+    var echoResponse = { body: message.to.name + ' says ' + message.body, room_id: message.room_id, friend: message.to };
     updateChatList(message.room_id, message);
     updateChatList(message.room_id, echoResponse)
     io.emit('reply', echoResponse);
@@ -73,6 +73,8 @@ io.on('connection', function(socket) {
 })
 
 
-var PORT = process.env.PORT || 3000;
-server.listen(PORT);
-console.log('listening on localhost:' + PORT);
+var isProduction = process.env.NODE_ENV === 'production';
+var PORT = isProduction ? process.env.PORT : 3000;
+server.listen(PORT, function () {
+  console.log('listening on localhost:' + PORT);
+});
