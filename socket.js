@@ -22,27 +22,20 @@ var chatList = [
     {
       room_id: 1, 
       friend: anand, 
-      messageList: [{
-        body: 'Hey',
-        room_id: 1,
-        friend: anand
-      }, 
-      {
-        body: 'Hey Back',
-        room_id: 1,
-        friend: user
-      }]
+      messageList: []
     },
     {
       room_id: 2, 
       friend: vignesh, 
       messageList: [{
         body: 'Hey Vijay',
-        room_id: 2
+        room_id: 2,
+        friend: vignesh
       }, 
       {
         body: 'Hey Piggy',
-        room_id: 2
+        room_id: 2,
+        friend: user
       }]
     }
   ];

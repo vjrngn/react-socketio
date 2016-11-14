@@ -7,11 +7,25 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 </head>
 <style> 
-  .container { margin-top: 75px; } 
-  * { font-family: 'Roboto', sans-serif; } 
-  input { box-shadow: none !important;  }
+  body { 
+      font-family: 'Roboto', sans-serif;
+      background: #F5F8FA;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      padding: 0;
+      margin: 0; }
+  .topBar {
+    background: #009688;
+    height: 125px;
+  }
+  .container {
+    margin-top: -75px;
+    height: calc(100% - 38px);
+    z-index: 100; } 
 </style>
 <body>
+  <div class="topBar"></div>
   <div class="container">
     <div id="app"></div>
   </div>

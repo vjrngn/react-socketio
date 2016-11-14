@@ -6,9 +6,9 @@ const Welcome = React.createClass({
 
   render () {
     return (
-        <Card>
-          <CardTitle className="text-primary" title="Welcome to chattr!" />
-        </Card>
+      <Card>
+        <CardTitle className="text-primary" title="Welcome to chattr!" />
+      </Card>
     )
   }
 })

@@ -17,5 +17,3 @@ const App = React.createClass({
 })
 
 ReactDOM.render(<App />, document.querySelector('#app'));
-
-export default App

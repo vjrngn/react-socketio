@@ -1,6 +1,7 @@
 import React from 'react'
 import Welcome from './Welcome'
 import ChatList from './ChatList'
+import { Card } from 'material-ui/card'
 import Conversation from './Conversation'
 import { Events, ChatStore } from '../stores/ChatStore'
 
