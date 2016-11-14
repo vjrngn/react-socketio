@@ -11,16 +11,16 @@ const Events = {
 let chatList = [];
 let fetchChatHistory = () => {
   ChatService.getAllChats().then(chats => {
-    chatList = chats
-  }).then(() => {
-    emitter.emit(Events.INITIALISED)
-  });
-}
+      chatList = chats
+    }).then(() => {
+      emitter.emit(Events.INITIALISED)
+    });
+};
 const ChatStore = {
   init () {
     fetchChatHistory();
     socket.on('reply', message => {
-      this.getMessagesForRoom (message.room_id).push(message);
+      this.getMessagesForRoom(message.room_id).push(message);
       emitter.emit(Events.UPDATE)
     })
   },
@@ -45,7 +45,7 @@ const ChatStore = {
 
   sendMessage (message) {
     socket.emit('message', message)
-    this.getMessagesForRoom (message.room_id).push(message);
+    this.getMessagesForRoom(message.room_id).push(message);
     emitter.emit(Events.UPDATE);
   }
 }

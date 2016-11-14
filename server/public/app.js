@@ -31793,7 +31793,7 @@
 	  },
 	  sendMessage: function sendMessage(e) {
 	    if (e.key === 'Enter') {
-	      var message = { body: this.state.messageBody, room_id: this.props.chat.room_id, friend: { id: 1, name: 'Vijay Rangan' } };
+	      var message = { body: this.state.messageBody, room_id: this.props.chat.room_id, friend: { id: 1, name: 'Me' }, to: { id: this.props.chat.friend.id, name: this.props.chat.friend.name } };
 	      _ChatStore.ChatStore.sendMessage(message);
 	      this.setState({ messageBody: '' });
 	    }
@@ -31819,7 +31819,7 @@
 	      emptyConversation,
 	      _react2.default.createElement(
 	        _Card.CardText,
-	        null,
+	        { style: { maxHeight: '500px', overflowY: 'scroll' } },
 	        this.state.messages.map(function (message) {
 	          return _react2.default.createElement(_Message2.default, { key: Math.random(), message: message });
 	        })
@@ -31855,7 +31855,6 @@
 	  },
 
 	  render: function render() {
-	    console.log(this.props.message);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'panel panel-default', style: { margin: '20px 20px 0 20px' } },
@@ -33127,16 +33126,19 @@
 	};
 
 	var chatList = [];
+	var fetchChatHistory = function fetchChatHistory() {
+	  _ChatService2.default.getAllChats().then(function (chats) {
+	    chatList = chats;
+	  }).then(function () {
+	    emitter.emit(Events.INITIALISED);
+	  });
+	};
 	var ChatStore = {
 	  init: function init() {
 	    var _this = this;
 
-	    _ChatService2.default.getAllChats().then(function (chats) {
-	      chatList = chats;
-	    }).then(function () {
-	      emitter.emit(Events.INITIALISED);
-	    });
-	    _socketConnection2.default.on('message', function (message) {
+	    fetchChatHistory();
+	    _socketConnection2.default.on('reply', function (message) {
 	      _this.getMessagesForRoom(message.room_id).push(message);
 	      emitter.emit(Events.UPDATE);
 	    });

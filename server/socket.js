@@ -3,9 +3,9 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
-const user = { id: 1, name: 'Vijay Rangan' },
-      anand = { id:2, name: 'Anand' },
-      vignesh = { id:3, name: 'Vignesh' },
+const me = { id: 1, name: 'Me' },
+      andy = { id:2, name: 'Andy' },
+      kaila = { id:3, name: 'Kaila' },
       john = { id:4, name: 'John' },
       kerry = { id:5, name: 'Kerry' },
       jane = { id:6, name: 'Jane' };
@@ -17,12 +17,12 @@ const user = { id: 1, name: 'Vijay Rangan' },
 var chatList = [
     {
       room_id: 1, 
-      friend: anand, 
+      friend: andy, 
       messageList: []
     },
     {
       room_id: 2, 
-      friend: vignesh, 
+      friend: kaila, 
       messageList: []
     },
     {
@@ -66,10 +66,10 @@ app.get('/chatList', function(req, res) {
 
 io.on('connection', function(socket) {
   socket.on('message', function(message) {
-    var echoResponse = { body: 'Remote receieved: ' + message.body, room_id: message.room_id, friend: { id: 4, name: 'Echo Bot' } };
+    var echoResponse = { body: 'Remote receieved: ' + message.body, room_id: message.room_id, friend: message.to };
     updateChatList(message.room_id, message);
     updateChatList(message.room_id, echoResponse)
-    io.emit('message', echoResponse);
+    io.emit('reply', echoResponse);
   })
 })
 
