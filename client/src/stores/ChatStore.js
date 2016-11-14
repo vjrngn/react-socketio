@@ -50,6 +50,6 @@ const ChatStore = {
     emitter.emit(Events.UPDATE);
   }
 }
-window.cs = ChatStore;
+
 export { ChatStore, Events };
 
