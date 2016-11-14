@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
-import { Card } from 'material-ui/card';
 import Avatar from 'material-ui/Avatar';
+import { Card } from 'material-ui/card';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 import {List, ListItem} from 'material-ui/List';
@@ -49,6 +49,7 @@ const ChatList = React.createClass({
 
     return (
       <Card>
+        <Subheader> <TextField hintText="Search" value={this.state.searchTerm} onChange={this.onSearchTermChange} /> </Subheader>
         <List>
           <Subheader>Recent chats</Subheader>
           {this.props.chats.filter(this.filterFriendList).map(renderChatItem)}
