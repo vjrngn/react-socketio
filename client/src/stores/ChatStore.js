@@ -1,7 +1,8 @@
 import events from 'events';
-import socket from './socketConnection'
+import io from 'socket.io-client'
 import ChatService from '../services/ChatService'
 
+const socket = io();
 const emitter = new events.EventEmitter;
 const Events = { 
   INITIALISED: 'INITIALISED', 
