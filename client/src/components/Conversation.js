@@ -54,7 +54,7 @@ const Conversation = React.createClass({
     if (!this.state.messages.length) {
       var emptyConversation = <h4 className="text-center text-success">New conversation</h4>
     }
-    let composeBoxStyles = { height: '45px', marginTop: '10px', borderRadius: '0', boxShadow: 'none', borderTop: '1px solid #e6e6e6' };
+    let composeBoxStyles = { height: '45px', marginTop: '10px', borderRadius: '0', border: 'none', boxShadow: 'none', borderTop: '1px solid #e6e6e6' };
     
     return (
       <Card>
