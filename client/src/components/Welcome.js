@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Card, CardTitle } from 'material-ui/card';
 
 const Welcome = React.createClass({
@@ -7,7 +7,9 @@ const Welcome = React.createClass({
   render () {
     return (
       <Card>
-        <CardTitle className="text-primary" title="Welcome to chattr!" />
+        <div className="text-center">
+          <CardTitle title="Welcome to chattr!" />
+        </div>
       </Card>
     )
   }

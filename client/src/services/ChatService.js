@@ -1,3 +1,7 @@
+/**
+ * Chatservice serves takes care of all HTTP communication with the server.
+ */
+
 export default {
   getAllChats () {
     return fetch('/chatList').then(response => {

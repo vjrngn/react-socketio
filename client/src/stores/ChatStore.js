@@ -1,6 +1,12 @@
+/**
+ * Chatstore is the central repository for all messages coming in
+ * or going out of the application. This follows the Flux architecture pattern
+ * where all chat state is centralized and state changes within the react components
+ * happen via events that are dispatched from this store and listened for at the component level
+ */
 import events from 'events';
-import io from 'socket.io-client'
-import ChatService from '../services/ChatService'
+import io from 'socket.io-client';
+import ChatService from '../services/ChatService';
 
 const socket = io();
 const emitter = new events.EventEmitter;

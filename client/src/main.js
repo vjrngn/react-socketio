@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Chattr from './components/Chattr'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Chattr from './components/Chattr';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Avatar from 'material-ui/Avatar';
 import { Card } from 'material-ui/card';

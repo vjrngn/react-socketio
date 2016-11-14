@@ -1,12 +1,8 @@
-import React from 'react'
-import Message from './Message'
+import React from 'react';
+import Message from './Message';
 
+import { ChatStore, Events } from '../stores/ChatStore';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-
-import { ChatStore, Events } from '../stores/ChatStore'
-import io from 'socket.io-client'
-
-var socket = io();
 
 const Conversation = React.createClass({
   displayName: 'Conversation',
