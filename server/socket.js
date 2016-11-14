@@ -3,7 +3,7 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
-const me = { id: 1, name: 'Me' },
+var me = { id: 1, name: 'Me' },
       andy = { id:2, name: 'Andy' },
       kaila = { id:3, name: 'Kaila' },
       john = { id:4, name: 'John' },
@@ -11,7 +11,7 @@ const me = { id: 1, name: 'Me' },
       jane = { id:6, name: 'Jane' };
 
 /**
- * In-memory store of messages. This can be a memcached data store or something from mongo.
+ * In-memory store of messages. This can be a memcached data store or from a database.
  * @type {Array}
  */
 var chatList = [
@@ -50,7 +50,6 @@ var chatList = [
 var updateChatList = function (roomId, message) {
   var chat = chatList.find(function (chat) { return chat.room_id == roomId });
   chat.messageList.push(message);
-  console.log(chat);
 };
 
 /**
@@ -74,6 +73,6 @@ io.on('connection', function(socket) {
 })
 
 
-const PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 server.listen(PORT);
 console.log('listening on localhost:' + PORT);
