@@ -3,16 +3,12 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
-
-  
-    
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT);
-
 const user = { id: 1, name: 'Vijay Rangan' },
       anand = { id:2, name: 'Anand' },
-      vignesh = { id:3, name: 'Vignesh' };
+      vignesh = { id:3, name: 'Vignesh' },
+      john = { id:4, name: 'John' },
+      kerry = { id:5, name: 'Kerry' },
+      jane = { id:6, name: 'Jane' };
 
 /**
  * In-memory store of messages. This can be a memcached data store or something from mongo.
@@ -27,16 +23,22 @@ var chatList = [
     {
       room_id: 2, 
       friend: vignesh, 
-      messageList: [{
-        body: 'Hey Vijay',
-        room_id: 2,
-        friend: vignesh
-      }, 
-      {
-        body: 'Hey Piggy',
-        room_id: 2,
-        friend: user
-      }]
+      messageList: []
+    },
+    {
+      room_id: 3, 
+      friend: john, 
+      messageList: []
+    },
+    {
+      room_id: 4, 
+      friend: kerry, 
+      messageList: []
+    },
+    {
+      room_id: 5, 
+      friend: jane, 
+      messageList: []
     }
   ];
 
@@ -71,4 +73,7 @@ io.on('connection', function(socket) {
   })
 })
 
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT);
 console.log('listening on localhost:' + PORT);

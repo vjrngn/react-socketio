@@ -54,7 +54,7 @@ const Conversation = React.createClass({
     if (!this.state.messages.length) {
       var emptyConversation = <h4 className="text-center text-success">New conversation</h4>
     }
-    let composeBoxStyles = { height: '45px', marginTop: '10px', borderRadius: '0', border: '1px solid #e6e6e6', boxShadow: 'none', borderTop: '1px solid #e6e6e6' }
+    let composeBoxStyles = { height: '45px', marginTop: '10px', borderRadius: '0', border: '1px solid #e6e6e6', boxShadow: 'none', borderTop: '1px solid #e6e6e6' };
     
     return (
       <Card>
@@ -64,7 +64,7 @@ const Conversation = React.createClass({
           avatar="http://loremflickr.com/320/240"
         />
         {emptyConversation}
-        <CardText>
+        <CardText style={{ maxHeight: '500px', overflowY: 'scroll' }}>
           {this.state.messages.map(message => <Message key={Math.random()} message={message} />)}
         </CardText>
         <input className="form-control" placeholder="Say something..." style={composeBoxStyles} value={this.state.messageBody} onChange={this.handleMessageChange} onKeyPress={this.sendMessage} />
