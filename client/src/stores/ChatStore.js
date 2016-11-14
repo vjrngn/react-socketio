@@ -4,6 +4,14 @@
  * where all chat state is centralized and state changes within the react components
  * happen via events that are dispatched from this store and listened for at the component level
  */
+
+// If we're not using a service worker, this 
+// is where we can store all messages in either localStorage
+// or other storage mechanisms available in the browser. All we 
+// will need to do is hook up listeners for when a message has been  
+// sent and when a reply is received from the server. This makes it easy
+// to reason about by keeping data reads and write consistent throughout the app.
+
 import events from 'events';
 import io from 'socket.io-client';
 import ChatService from '../services/ChatService';
