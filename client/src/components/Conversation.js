@@ -1,7 +1,7 @@
 import React from 'react'
 import Message from './Message'
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 import { ChatStore, Events } from '../stores/ChatStore'
 import io from 'socket.io-client'
