@@ -8,7 +8,7 @@
 // If we're not using a service worker, this 
 // is where we can store all messages in either localStorage
 // or other storage mechanisms available in the browser. All we 
-// will need to do is hook up listeners for when a message has been  
+// will need to do is hook into listeners for when a message has been  
 // sent and when a reply is received from the server. This makes it easy
 // to reason about by keeping data reads and write consistent throughout the app.
 
